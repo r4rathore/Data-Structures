@@ -60,10 +60,70 @@ class BST:
             return 0
         return BST.hight_of_tree(self.root)
 
+    def preorder_traversal_helper(treenode:Node):
+        if treenode is None:
+            return None
+        print(treenode.data)
+        BST.preorder_traversal_helper(treenode.left)
+        BST.preorder_traversal_helper(treenode.right)
+
+    def traverse_preorder(self):
+        return BST.preorder_traversal_helper(self.root)
+
+    def inorder_traversal_helper(treenode:Node):
+        if treenode is None:
+            return
+        BST.inorder_traversal_helper(treenode.left)
+        print(treenode.data)
+        BST.inorder_traversal_helper(treenode.right)
+
+
+    def traverse_inorder(self):
+        return  BST.inorder_traversal_helper(self.root)
+
+    def preorder_traversal_helper(treenode:Node):
+        if treenode is None:
+            return
+        BST.inorder_traversal_helper(treenode.left)
+        BST.inorder_traversal_helper(treenode.right)
+        print(treenode.data)
+
+    def traverse_preorder(self):
+        return  BST.preorder_traversal_helper(self.root)
+
+    def deptorder_helper(node_queue:list):
+        if (node_queue is None) or (len(node_queue) <= 0):
+            return
+        else:
+            new_queue = []
+            for node in node_queue:
+                print(node.data)
+                if node.left is not None:
+                    new_queue.append(node.left)
+                if node.right is not None:
+                    new_queue.append(node.right)
+
+            return BST.deptorder_helper(new_queue)
+
+
+    def depth_order_traversal(self):
+        node_queue: list = [self.root]
+        return BST.deptorder_helper(node_queue)
+
+
+
+
+
+
+
 
 tree = BST()
-tree.insert(4)
-tree.insert(5)
-tree.insert(1)
-tree.insert(2)
-print(tree.tree_Heigh())
+tree.insert(14)
+tree.insert(10)
+tree.insert(16)
+tree.insert(8)
+tree.insert(9)
+tree.insert(15)
+tree.insert(18)
+
+tree.depth_order_traversal()
